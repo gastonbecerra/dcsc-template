@@ -39,6 +39,29 @@
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 
 
@@ -55,6 +78,7 @@
 
 
 <div class="encabezado">
+<!-- por favor, no modificar! -->
 <style>
   .encabezado {
     display: flex;
@@ -95,6 +119,10 @@ particularmente para la tarea de codificar o anotar un corpus de
 documentos o fragmentos de los mismos, a través de una interfaz gráfica
 (GUI) que corre en cualquier navegador que tenga JavaScript
 habilitado.</p>
+<p>En investigación cualitativa, la codificación es un proceso clave
+<span class="citation">(Saldaña, 2016)</span>. Otro ejemplo importante
+se encuentra en <span class="citation">(Auerbach &amp; Silverstein,
+2003)</span>.</p>
 <p>En investigación cualitativa una tarea esencial es la de “codificar”:
 “A code in qualitative inquiry is most often a word or short phrase that
 symbolically assigns a summative, salient, essence-capturing, and/or
@@ -134,13 +162,8 @@ fragmentos, sino que cada documento es clasificado con una etiqueta de
 una potencial aplicación beneficiosa o a un riesgo. El ejemplo se
 utiliza en este tutorial3, donde se cita el corpus más amplio.</p>
 </div>
-<div id="instalación" class="section level2">
-<h2>Instalación</h2>
-<p>Se puede instalar desde GitHub:
-devtools::install_github(“gastonbecerra/mincaqdasr”)</p>
-<pre class="r"><code># install.packages(&quot;devtools&quot;)</code></pre>
-<div id="usar-mincaqdasr-en-r" class="section level3">
-<h3>Usar mincaqdasr en R</h3>
+<div id="usar-mincaqdasr-en-r" class="section level2">
+<h2>Usar mincaqdasr en R</h2>
 <p>Cuando llamamos a <code>mincaqdasr::start_gui()</code> estamos
 abriendo un .html adentro de una shinyapp (no es la mejor
 implementación, pero es rápida; lo mejor sería abrir el navegador sin
@@ -161,14 +184,33 @@ package. En cuyo caso, sólo hay que descargar la carpeta que tiene 3
 archivos llamados “gui” (.html, .js, .css) y 2 .json de ejemplo. Para
 correr el GUI hay que abrir el archivo inst/gui.html con un navegador
 que tenga JavaScript habilitado. Los documentos y códigos de anotación
-se pueden incluir directamente dentro del</p>
-<script></script>
-<p>, en una variable llamada input_data. En el .html ya hay un ejemplo
-comentado que se puede editar.</p>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
+se pueden incluir directamente dentro del
+<code>&lt;script&gt;&lt;/script&gt;</code>, en una variable llamada
+input_data. En el .html ya hay un ejemplo comentado que se puede
+editar.</p>
+</div>
+<div id="otras-herramientas" class="section level2">
+<h2>Otras herramientas</h2>
+<ul>
+<li><p>Simil NVivo o Atlas.ti pero minimalista, de modo que se incluye
+más fácilmente en tu propio <em>workflow</em> de trabajo y otras tareas
+del análisis (scrapeo, limpieza, etc.)</p></li>
+<li><p>qcoder requiere armar carpeta</p></li>
+<li><p>rqda requeire GFTk2 discontinuado</p></li>
+</ul>
+</div>
+<div id="referencias" class="section level1">
+<h1>Referencias</h1>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0" line-spacing="2">
+<div id="ref-auerbach2003" class="csl-entry">
+Auerbach, C. F., &amp; Silverstein, L. B. (2003). Qualitative data: An
+introduction to coding and analysis. <em>NYU Press</em>.
+</div>
+<div id="ref-saldaña2016" class="csl-entry">
+Saldaña, J. (2016). <em>The coding manual for qualitative
+researchers</em>. SAGE Publications.
+</div>
 </div>
 </div>
 
