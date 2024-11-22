@@ -1,0 +1,289 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{fontspec}
+\setmainfont{Fira Sans Condensed}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+Revista Desarrollos en ciencias sociales computacionales Vol. 0 ( 0 ),
+0-0
+
+mincaqdasr. Herramienta minimalista para anotación y codificación de
+documentos
+
+mincaqdasr. A Minimalist Tool for Document Annotation and Coding
+
+Gastón Becerra ( Universidad de Flores, Argentina )
+\href{mailto:gaston.becerra@uflouniversidad.edu.ar}{\nolinkurl{gaston.becerra@uflouniversidad.edu.ar}}
+https://orcid.org/0009-0006-9160-9744
+
+Juan Pablo López-Alurralde ( Universidad de Flores, Argentina )
+\href{mailto:juan.pablo.lopez@uflouniversidad.edu.ar}{\nolinkurl{juan.pablo.lopez@uflouniversidad.edu.ar}}
+https://orcid.org/0009-0006-9160-9744
+
+Resumen: mincaqdasr es una herramienta minimalista para el análisis
+cualitativo (CAQDAS), diseñada puntualmente para codificar o anotar
+corpus de documentos mediante una interfaz web. mincaqdasr genera un
+archivo .json que incluye todos los elementos del proyecto, (documentos,
+fragmentos, anotaciones, códigos, etc.) eliminando la necesidad de
+gestionar carpetas adicionales. mincaqdasr puede ser invocado desde R o
+de manera autónoma con cualquier navegador que tenga JavaScript
+habilitado.
+
+Palabras clave: CAQDAS, R, JavaScript, software para análisis
+cualitativo de datos asistido por computadora, investigación cualitativa
+
+Abstract: mincaqdasr is a minimalist tool for qualitative analysis
+(CAQDAS), specifically designed for coding or annotating document
+corpora through a web interface. mincaqdasr generates a .json file that
+includes all project elements (documents, fragments, annotations, codes,
+etc.), eliminating the need to manage additional folders. mincaqdasr can
+be invoked from R or used independently with any browser that supports
+JavaScript.
+
+Keywords: CAQDAS, R, JavaScript, computer-assisted qualitative data
+analysis software, qualitative research
+
+Recibido: 2024-11-14 \textbar{} Aceptado: 0000-00-00
+
+Recurso/Resources
+
+URL
+
+Repositorio/Repository
+
+https://github.com/gastonbecerra/mincaqdasr
+
+Licencia/Licence
+
+https://github.com/gastonbecerra/mincaqdasr?tab=GPL-3.0-1-ov-file\#readme
+
+Lenguajes/Languages Formatos/Formats
+
+R
+
+JavaScript
+
+\subsection{Justificación}\label{justificaciuxf3n}
+
+mincaqdasr es una herramienta para análisis cualitativo (CAQDAS),
+diseñada específicamente para asistir en la tarea de codificar o anotar
+un corpus de documentos breves a través de una interfaz web. En
+investigación cualitativa, este proceso de anotación es conocido como
+``codificación'', definido como ``\ldots{} una palabra o frase breve que
+simbólicamente asigna un atributo sintético, saliente, esencial y/o
+evocativo a una porción de datos basados en el lenguaje'' (Saldaña,
+2016, p. 3). Este proceso suele ser uno de los primeros pasos en un
+diseño espiralado o por etapas, donde los códigos se integran en temas y
+argumentos para conceptualizar y desarrollar una narrativa teórica
+(Auerbach \& Silverstein, 2003).
+
+La herramienta ofrece una interfaz gráfica sencilla que permite
+identificar y resaltar fragmentos de texto, crear e imputar códigos, y
+registrar memos o comentarios. El resultado de la codificación se
+exporta en formato JSON (JavaScript Object Notation), un estándar que
+puede ser manipulado desde cualquier lenguaje de análisis de datos, como
+R o Python. De este modo, mincaqdasr promueve la transparencia y la
+colaboración en la investigación cualitativa.
+
+Construida como una aplicación web autónoma, mincaqdasr puede ejecutarse
+en cualquier navegador que tenga JavaScript habilitado. Su diseño
+minimalista se centra exclusivamente en las tareas esenciales para la
+codificación, dejando al investigador la flexibilidad de gestionar otras
+etapas del análisis cualitativo, como la limpieza de datos, el manejo de
+documentos o la construcción de tablas y redes temáticas, utilizando los
+flujos de trabajo que considere más convenientes.
+
+El corpus se puede cargar como un vector simple de texto, eliminando la
+necesidad de crear carpetas o paquetes (bundles) como en otras
+herramientas. Para facilitar el trabajo en R, mincaqdasr incluye
+funciones para iniciar la interfaz como una shinyapp y para manipular el
+archivo JSON resultante de la codificación.
+
+\subsection{Estructura de los datos}\label{estructura-de-los-datos}
+
+Los datos se guardan en un archivo JSON que incluye 4 elementos:
+
+\begin{itemize}
+\tightlist
+\item
+  documentos (como un vector de texto);
+\item
+  códigos (un vector de texto);
+\item
+  anotaciones a nivel documento, referenciando uno o varios códigos y un
+  memo del anotador;
+\item
+  anotaciones a nivel fragmento, referenciando uno o varios códigos y un
+  memo del anotador;
+\end{itemize}
+
+Incluimos dos ejemplos breves de codificaciones en formato JSON. El
+primero retoma fragmentos del trabajo de M. Zizi en el proyecto ``The
+Yeshiva University Fatherhood Project'', que Auerbach y Silverstein
+(2003) presentan en su libro, ilustrando paso a paso las tareas clave
+del análisis cualitativo: desde la lectura y selección de fragmentos
+hasta la asignación de códigos y su elaboración conceptual. Con
+mincaqdasr, es posible registrar todas estas tareas, excepto la última.
+
+El segundo ejemplo contiene fragmentos de noticias de la prensa
+argentina sobre ``big data''. En este caso, no se asignan códigos a
+fragmentos específicos; en su lugar, cada documento se clasifica con una
+etiqueta ``positivo'' o ``negativo'', según mencione una aplicación
+beneficiosa o un riesgo. Otras tareas de análisis con este corpus se
+detallan en otro material propio (Becerra \& López-Alurralde, 2024).
+
+\subsection{Otras herramientas}\label{otras-herramientas}
+
+Existen varias herramientas comerciales para asistir en el análisis
+cualitativo (CAQDAS). Las más conocidas son NVivo, Maxda o Atlas.ti, que
+incluyen varias funciones de manejo de documentos y análisis, y que
+trabajan con varios formatos de documentos, no sólo textuales. A
+diferencia de estas, mincaqdasr es gratuita y de código abierto, y se
+limita a texto plano y no cubre funciones más allá de las necesarias
+para anotar o codificar, lo que puede ser conveniente cuando el
+investigador maneja su flujo de trabajo en un lenguaje de análisis de
+datos como R.
+
+En R se encuentra disponible el package qcoder (Duckles et al., 2024)
+que también permite la codificación a través de una interfaz gráfica
+que, además, permite la exploración de códigos y fragmentos. Sin
+embargo, tiene un manejo del proyecto y sus archivos mucho más
+estructurado, de modo que puede resultar más dificil de integrar en un
+código más amplio. No conocemos otros proyectos activos --y se debe
+advertir que qcoder no parece haber tenido actualizaciones en los
+últimos años-- que cumplan funciones de CAQDAS.
+
+\subsection{Referencias}\label{referencias}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-auerbach2003}
+Auerbach, C. F., \& Silverstein, L. B. (2003). \emph{Qualitative data:
+An introduction to coding and analysis}. NYU Press.
+
+\bibitem[\citeproctext]{ref-cursor}
+Becerra, G., \& López-Alurralde, J. P. (2024). \emph{Curso introductorio
+a r para las ciencias sociales}.
+\url{https://bookdown.org/gaston_becerra/curso-intro-r/}
+
+\bibitem[\citeproctext]{ref-qcoder2024}
+Duckles, B., Sholler, D., Draper, J., \& Laderas, T. (2024).
+\emph{Qcoder: Lightweight qualitative coding}.
+\url{https://github.com/ropenscilabs/qcoder}
+
+\bibitem[\citeproctext]{ref-saldauxf1a2016}
+Saldaña, J. (2016). \emph{The coding manual for qualitative
+researchers}. SAGE Publications.
+
+\end{CSLReferences}
+
+Gastón Becerra, Juan Pablo López-Alurralde ( 2024 ). mincaqdasr.
+Herramienta minimalista para anotación y codificación de documentos .
+Desarrollos en ciencias sociales computacionales 0 ( 0 ) , 0-0
+
+Revista Desarrollos en Ciencias Sociales Computacionales \textbar{}
+ISSN: en trámite https://revistadesarrollos.uflo.edu.ar/ Licenciatura en
+Sociología / Facultad de Psicología y Ciencias Sociales / Universidad de
+Flores, Argentina
+
+\end{document}

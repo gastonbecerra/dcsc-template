@@ -1,140 +1,211 @@
 ---
-output: 
+output:
   html_document:
     self_contained: false
     theme: null
-    highlight: null
     mathjax: null
+    highlight: tango
     includes:
-      in_header: custom-head.html
+      in_header: "custom-head.html"
+  word_document: default
+  pdf_document: 
+    latex_engine: xelatex
+    keep_tex: true
+    highlight: tango
 bibliography: referencias.bib
-csl: apa.csl # Opcional, si quieres usar un estilo de citación como APA
+csl: apa.csl
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Fira Sans Condensed}
 ---
 
-```{r metadatos, echo=FALSE}
 
-# los metadatos del articulo se guardan como un JSON
-
-metadata <- '{
-
-  "title_sp": "Título del artículo. Max 10 palabras",
-  "abstract_sp": "Este es el resumen del artículo. Puede contener varias líneas de texto que describen brevemente el contenido y objetivos principales. Max. 150 palabras",
-  "keywords_sp": ["keyword 1", "keyword 2", "keyword 3", "keyword 4", "keyword 5"],
-  
-  "title_en": "Paper title. Max 10 words",
-  "abstract_en": "Este es el resumen del artículo. Puede contener varias líneas de texto que describen brevemente el contenido y objetivos principales.",
-  "keywords_en": ["keyword 1", "keyword 2", "keyword 3", "keyword 4", "keyword 5"],
-  
-  "authors_name": ["Nombre Apellido", "Nombre Apellido", "Nombre Apellido"],
-  "authors_afilliation": ["Institución, País", "Institución, País", "Institución, País"],
-  "authors_orcid": ["https://orcid.org/0009-0006-9160-9744", "https://orcid.org/0009-0006-9160-9744", "https://orcid.org/0009-0006-9160-9744"],
-  "authors_email": ["email@email.email", "email@email.email", "email@email.email"],
-  
-  "repository_url": "",
-  "archive_url": "",
-  "documentation_url": "",
-  "vignette_url": "",
-  "demo_url": ""
-  
-}'
-
-```
-
-```{r setup, echo=FALSE}
+```{r setup, echo=FALSE, results='asis'}
 
 # por favor, no modificar!
+# los datos se toman de metadatosJSON
 
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 suppressMessages(suppressWarnings(library(jsonlite)))
-library(jsonlite)
 
-metadata <- fromJSON(metadata)
+library(jsonlite)
+metadata <- fromJSON('metadatos.json')
+
+# metadatos -----
 
 cat('
 <title>', metadata$title_sp, ' | DCSC</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="description" content="', metadata$abstract_sp, '" />
 <meta name="keywords" content="', paste(metadata$keywords_sp, collapse = ', '), '" />
-', paste(lapply(metadata$authors_name, function(autor) {
-    sprintf('<meta name="DC.Creator.PersonalName" content="%s"/>', autor)
-}), collapse = '\n'), '
+<meta name="DC.Language" content="', paste(metadata$language, collapse = ', '), '" />
+<meta name="DC.Type" content="', metadata$type, '" />
+<meta name="DC.Format" content="', paste(metadata$format, collapse = ', '), '" />
+<meta name="DC.Creator.PersonalName" content="', paste(metadata$authors_name, collapse = '"/><meta name="DC.Creator.PersonalName" content="'), '" />
+<meta name="DC.Creator.Affiliation" content="', paste(metadata$authors_affiliation, collapse = '"/><meta name="DC.Creator.Affiliation" content="'), '" />
+<meta name="DC.Creator.ORCID" content="', paste(metadata$authors_orcid, collapse = '"/><meta name="DC.Creator.ORCID" content="'), '" />
+<meta name="DC.Creator.Email" content="', paste(metadata$authors_email, collapse = '"/><meta name="DC.Creator.Email" content="'), '" />
+<meta name="DC.Identifier" content="', metadata$identifier, '" />
+<meta name="DC.Identifier.URI" content="', metadata$identifier_uri, '" />
+<meta name="DC.Source" content="', metadata$source, '" />
+<meta name="DC.Source.Volume" content="', metadata$source_volume, '" />
+<meta name="DC.Source.Issue" content="', metadata$source_issue, '" />
+<meta name="DC.Source.ISSN" content="', metadata$source_issn, '" />
+<meta name="DC.Date.Created" content="', metadata$date_created, '" />
+<meta name="DC.Date.Issued" content="', metadata$date_issued, '" />
+<meta name="DC.Date.Modified" content="', metadata$date_modified, '" />
+<meta name="DC.Publisher" content="', metadata$publisher, '" />
+<meta name="DC.Format.extent" content="', metadata$publisher, '" />
+<meta name="DC.Subject" content="', metadata$section, '" />
+
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+
 ', file = "custom-head.html")
 
+# encabezado -----
+
+cat('<div style="margin-bottom: 20px;">')
+
+# Logo y nombre de la revista con títulos
+cat('<div style="display: flex; align-items: flex-start; margin-bottom: 20px;">')
+cat('<img src="logo-blanco.jpg" alt="Logo Revista" style="height: 175px; margin-right: 20px;">')
+cat('<div>')
+cat('<p style="margin: 20px 0px; color: #666;">Revista <strong>', metadata$source, '</strong>Vol. ', metadata$source_volume, '(', metadata$source_issue, '), ', metadata$pages, '</p>')
+cat('<h1 class="titulo-es" style="font-size: 1.8em; margin: 10px 0; color: #9237E2;">', metadata$title_sp, '</h1>')
+cat('<h2 class="titulo-en" style="font-size: 1.4em; margin: 0; color: #666;">', metadata$title_en, '</h2>')
+cat('</div>')
+cat('</div>')
+
+cat('</div>')
+
+# cat('<div style="margin-bottom: 20px;">')
+# cat('<h1 class="titulo-es">', metadata$title_sp, '</h1>')
+# cat('<h2 class="titulo-en">', metadata$title_en, '</h2>')
+
+# Autores con datos
+for (i in seq_along(metadata$authors_name)) {
+  cat('<p class="authors">',
+      metadata$authors_name[i], 
+      '(', metadata$authors_affiliation[i], ') <br/>', 
+      metadata$authors_email[i] , ' ',
+      '<a href="', metadata$authors_orcid[i], '" target="_blank">', metadata$authors_orcid[i], '</a>',
+      '</p>')
+}
+
+# Abstract y keywords en español
+cat('<p class="abstract"><strong>Resumen:</strong> ', 
+    metadata$abstract_sp, '</p>')
+cat('<p class="abstract"><strong>Palabras clave:</strong> ', 
+    paste(metadata$keywords_sp, collapse = ", "), '</p>')
+
+# Abstract y keywords en inglés
+cat('<p class="abstract"><strong>Abstract:</strong> ', 
+    metadata$abstract_en, '</p>')
+cat('<p class="abstract"><strong>Keywords:</strong> ', 
+    paste(metadata$keywords_en, collapse = ", "), '</p>')
+
+# Fechas
+cat('<p class="abstract"><strong>Recibido:</strong> ', 
+    metadata$date_created, 
+    ' | <strong>Aceptado:</strong> ', 
+    metadata$date_issued, '</p>')
+
+# Tabla de URLs
+cat('<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">')
+cat('<tr style="background-color: #f2f2f2; text-align: left;">',
+    '<th class="data-header">Recurso/Resources</th>',
+    '<th class="data-content">URL</th></tr>')
+
+url_types <- c("Repositorio/Repository", 
+               "Archivo/Archive", 
+               "Documentación", 
+               "Vignette", 
+               "Demo", 
+               "Licencia/Licence")
+urls <- c(metadata$repository_url, 
+          metadata$archive_url, 
+          metadata$documentation_url, 
+          metadata$vignette_url, 
+          metadata$demo_url, 
+          metadata$licence_url)
+for (i in seq_along(url_types)) {
+  if (urls[i] != "") {
+    cat('<tr>',
+        '<td class="data-header">', url_types[i], '</td>',
+        '<td class="data-content"><a href="', urls[i], '" target="_blank">', urls[i], '</a></td>',
+        '</tr>')
+  }
+}
+
+cat('<tr>',
+        '<td class="data-header">Lenguajes/Languages Formatos/Formats</td>',
+        '<td class="data-content">')
+
+cat('<div class="tag-list">')
+for (tech in metadata$techonologies) {
+  cat('<div class="tag">', tech, '</div>')
+}
+cat('</div>')
+cat('</td></tr>')
+cat('</table>')
+
+cat('</div>')
+
 ```
-
-:::: encabezado
-<!-- por favor, no modificar! -->
-
-```{=html}
-<style>
-  .encabezado {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #B8BCC2;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  .encabezado img {
-    height: 80px;
-    margin-right: 20px;
-  }
-  .encabezado h1 {
-    margin: 0;
-    color: #EA80FC;
-    text-align: center;
-  }
-  .encabezado p {
-    margin: 5px 0;
-    color: #B8BCC2;
-  }
-  h2 { color:red; }
-</style>
-```
-
-<img src="logo.png" alt="Logo"/>
-
-<div>
-
-<h1>`r metadata$title_sp`</h1>
-
-<p><strong>Autores:</strong> `r paste(metadata$authors_names, collapse = ", ")`</p>
-
-</div>
-::::
 
 ## Justificación
 
-mincaqdasr es un herramienta para análisis cualitativo (CAQDAS), particularmente para la tarea de codificar o anotar un corpus de documentos o fragmentos de los mismos, a través de una interfaz gráfica (GUI) que corre en cualquier navegador que tenga JavaScript habilitado.
+mincaqdasr es una herramienta para análisis cualitativo (CAQDAS), diseñada específicamente para asistir en la tarea de codificar o anotar un corpus de documentos breves a través de una interfaz web. En investigación cualitativa, este proceso de anotación es conocido como “codificación”, definido como “... una palabra o frase breve que simbólicamente asigna un atributo sintético, saliente, esencial y/o evocativo a una porción de datos basados en el lenguaje” [@saldaña2016, p. 3]. Este proceso suele ser uno de los primeros pasos en un diseño espiralado o por etapas, donde los códigos se integran en temas y argumentos para conceptualizar y desarrollar una narrativa teórica [@auerbach2003].
 
-En investigación cualitativa, la codificación es un proceso clave [@saldaña2016]. Otro ejemplo importante se encuentra en [@auerbach2003].
+La herramienta ofrece una interfaz gráfica sencilla que permite identificar y resaltar fragmentos de texto, crear e imputar códigos, y registrar memos o comentarios. El resultado de la codificación se exporta en formato JSON (JavaScript Object Notation), un estándar que puede ser manipulado desde cualquier lenguaje de análisis de datos, como R o Python. De este modo, mincaqdasr promueve la transparencia y la colaboración en la investigación cualitativa.
 
-En investigación cualitativa una tarea esencial es la de “codificar”: “A code in qualitative inquiry is most often a word or short phrase that symbolically assigns a summative, salient, essence-capturing, and/or evocative attribute for a portion of language-based or visual data”1. El objetivo de mincaqdasr es ofrecer una interfaz gráfica sencilla para facilitar este proceso, que puedar ser incluida en el código de un análisis mayor (donde, por ejemplo, se genera el corpus de documentos, o se procesen correlaciones entre los códigos asignados), y que ayude a volver nuestro análisis más transparente y transportable.
+Construida como una aplicación web autónoma, mincaqdasr puede ejecutarse en cualquier navegador que tenga JavaScript habilitado. Su diseño minimalista se centra exclusivamente en las tareas esenciales para la codificación, dejando al investigador la flexibilidad de gestionar otras etapas del análisis cualitativo, como la limpieza de datos, el manejo de documentos o la construcción de tablas y redes temáticas, utilizando los flujos de trabajo que considere más convenientes.
 
-El corpus anotado se exporta en un archivo .json que contiene todos los elementos de un proyecto, de modo modo que no es necesario hacer bundles, carpetas, ni exportar nada más.
+El corpus se puede cargar como un vector simple de texto, eliminando la necesidad de crear carpetas o paquetes (bundles) como en otras herramientas. Para facilitar el trabajo en R, mincaqdasr incluye funciones para iniciar la interfaz como una shinyapp y para manipular el archivo JSON resultante de la codificación.
 
-## Estructura de datos
+## Estructura de los datos
 
-Los datos se guardan en .json que incluye 4 elementos primarios: \* documentos (como un vector de texto); \* códigos (un vector de texto) que se aplican tanto para documentos como a fragmentos; \* anotaciones a nivel documento, que incluyen la referencia a uno o varios códigos y un memo del anotador; \* fragmentos y anotaciones a nivel fragmentos, que incluyen la referencia al documento que contiene el fragment, la referencia a uno o varios códigos, y memo del anotador.
+Los datos se guardan en un archivo JSON que incluye 4 elementos: 
 
-Un ejemplo de este .json corresponde a un análisis sobre sentidos de la partenidad (The Yeshiva University Fatherhood Project) que Auerbach y Silverstein incluyen en su libro sobre investigación cualitativa, codificación y grounded theory2, y que los autores analizan paso a paso: la lectura de los documentos, selección de los fragmentos, anotación de comentarios del analista, y generación y asignación de códigos o etiquetas. Todos estos pasos se pueden realizar con mincaqdasr.
+- documentos (como un vector de texto); 
+- códigos (un vector de texto);
+- anotaciones a nivel documento, referenciando uno o varios códigos y un memo del anotador;
+- anotaciones a nivel fragmento, referenciando uno o varios códigos y un memo del anotador;
 
-En R, estos .json pueden ser importado en R con jsonlite::read_json() y manipulados como una lista. El package de mincaqsdar incluye algunas funciones para simplificar esta manipulación de datos.
+Incluimos dos ejemplos breves de codificaciones en formato JSON. El primero retoma fragmentos del trabajo de M. Zizi en el proyecto "The Yeshiva University Fatherhood Project", que Auerbach y Silverstein (2003) presentan en su libro, ilustrando paso a paso las tareas clave del análisis cualitativo: desde la lectura y selección de fragmentos hasta la asignación de códigos y su elaboración conceptual. Con mincaqdasr, es posible registrar todas estas tareas, excepto la última.
 
-Otro ejemplo de .json es sobre fragmentos de noticias de la prensa argentina acerca de “big data”. En este caso no se asignan códigos a fragmentos, sino que cada documento es clasificado con una etiqueta de “positivo” o “negativo”, de acuerdo a si el big data queda asociado a una potencial aplicación beneficiosa o a un riesgo. El ejemplo se utiliza en este tutorial3, donde se cita el corpus más amplio.
-
-## Usar mincaqdasr en R
-
-Cuando llamamos a `mincaqdasr::start_gui()` estamos abriendo un .html adentro de una shinyapp (no es la mejor implementación, pero es rápida; lo mejor sería abrir el navegador sin llamar una shinyapp). Esto significa que R queda “escuchando” la shinyapp de modo que vamos a ver en nuestra consola un mensaje tipo Listening on <http://127.0.0.1:7654>. Una vez que hayamos terminado de trabajar con el GUI debemos cerrar este proceso para poder seguir usando R. You can stop the app and return access to the console using any one of these options: Click the stop sign icon on the R console toolbar. Click on the console, then press Esc (or press Ctrl + C if you’re not using RStudio). Close the Shiny app window. Más info sobre esto acá: <https://mastering-shiny.org/basic-app.html#running> Usar mincaqdasr sin R El GUI está pensado para correr de manera autónoma, de modo que se puede utilizar sin llamarlo desde R, ni instalar todo el package. En cuyo caso, sólo hay que descargar la carpeta \inst que tiene 3 archivos llamados “gui” (.html, .js, .css) y 2 .json de ejemplo. Para correr el GUI hay que abrir el archivo inst/gui.html con un navegador que tenga JavaScript habilitado. Los documentos y códigos de anotación se pueden incluir directamente dentro del `<script></script>`, en una variable llamada input_data. En el .html ya hay un ejemplo comentado que se puede editar.
+El segundo ejemplo contiene fragmentos de noticias de la prensa argentina sobre “big data”. En este caso, no se asignan códigos a fragmentos específicos; en su lugar, cada documento se clasifica con una etiqueta "positivo" o "negativo", según mencione una aplicación beneficiosa o un riesgo. Otras tareas de análisis con este corpus se detallan en otro material propio [@cursor].
 
 ## Otras herramientas
 
--   Simil NVivo o Atlas.ti pero minimalista, de modo que se incluye más fácilmente en tu propio *workflow* de trabajo y otras tareas del análisis (scrapeo, limpieza, etc.)
+Existen varias herramientas comerciales para asistir en el análisis cualitativo (CAQDAS). Las más conocidas son NVivo, Maxda o Atlas.ti, que incluyen varias funciones de manejo de documentos y análisis, y que trabajan con varios formatos de documentos, no sólo textuales. 
+A diferencia de estas, mincaqdasr es gratuita y de código abierto, y se limita a texto plano y no cubre funciones más allá de las necesarias para anotar o codificar, lo que puede ser conveniente cuando el investigador maneja su flujo de trabajo en un lenguaje de análisis de datos como R.
 
--   qcoder requiere armar carpeta
+En R se encuentra disponible el package qcoder [@qcoder2024] que también permite la codificación a través de una interfaz gráfica que, además, permite la exploración de códigos y fragmentos. Sin embargo, tiene un manejo del proyecto y sus archivos mucho más estructurado, de modo que puede resultar más dificil de integrar en un código más amplio. No conocemos  otros proyectos activos --y se debe advertir que qcoder no parece haber tenido actualizaciones en los últimos años-- que cumplan funciones de CAQDAS. 
 
--   rqda requeire GFTk2 discontinuado
+## Referencias
 
+<div id="refs"></div>
 
-# Referencias
+```{r footer, echo=FALSE, results='asis'}
 
-\printbibliography
+cat('<footer>',
+
+  '<p>', 
+  paste(metadata$authors_name, collapse = ", "), ' (', substr(metadata$date_created, 1, 4), '). ', 
+  metadata$title_sp, '. ', '<i>', metadata$source, '</i>', 
+  metadata$source_volume, '(', metadata$source_issue, ')',
+  ', ', metadata$pages, 
+  '</p>',
+  
+  '<p>', 
+  'Revista <strong>Desarrollos en Ciencias Sociales Computacionales</strong> | ISSN: en trámite <br/>',
+  '<a href="https://revistadesarrollos.uflo.edu.ar/">https://revistadesarrollos.uflo.edu.ar/</a> <br/>',
+  'Licenciatura en Sociología / Facultad de Psicología y Ciencias Sociales / Universidad de Flores, Argentina <br/>',
+  '</p>',
+  
+  '</footer>')
+
+```

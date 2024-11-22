@@ -16,13 +16,34 @@
 
 <script src="test3_files/header-attrs-2.29/header-attrs.js"></script>
 
-<title> Título del artículo. Max 10 palabras  | DCSC</title>
+<title> mincaqdasr. Herramienta minimalista para anotación y codificación de documentos  | DCSC</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content=" Este es el resumen del artículo. Puede contener varias líneas de texto que describen brevemente el contenido y objetivos principales. Max. 150 palabras " />
-<meta name="keywords" content=" keyword 1, keyword 2, keyword 3, keyword 4, keyword 5 " />
- <meta name="DC.Creator.PersonalName" content="Nombre Apellido"/>
-<meta name="DC.Creator.PersonalName" content="Nombre Apellido"/>
-<meta name="DC.Creator.PersonalName" content="Nombre Apellido"/> 
+<meta name="description" content=" mincaqdasr es una herramienta minimalista para el análisis cualitativo (CAQDAS), diseñada puntualmente para codificar o anotar corpus de documentos mediante una interfaz web. mincaqdasr genera un archivo .json que incluye todos los elementos del proyecto, (documentos, fragmentos, anotaciones, códigos, etc.) eliminando la necesidad de gestionar carpetas adicionales. mincaqdasr puede ser invocado desde R o de manera autónoma con cualquier navegador que tenga JavaScript habilitado. " />
+<meta name="keywords" content=" CAQDAS, R, JavaScript, software para análisis cualitativo de datos asistido por computadora, investigación cualitativa " />
+<meta name="DC.Language" content=" es, en " />
+<meta name="DC.Type" content=" Text.Serial.Journal " />
+<meta name="DC.Format" content=" application/pdf, text/html " />
+<meta name="DC.Creator.PersonalName" content=" Gastón Becerra"/><meta name="DC.Creator.PersonalName" content="Juan Pablo López-Alurralde " />
+<meta name="DC.Creator.Affiliation" content=" Universidad de Flores, Argentina"/><meta name="DC.Creator.Affiliation" content="Universidad de Flores, Argentina " />
+<meta name="DC.Creator.ORCID" content=" https://orcid.org/0009-0006-9160-9744"/><meta name="DC.Creator.ORCID" content="https://orcid.org/0009-0006-9160-9744 " />
+<meta name="DC.Creator.Email" content=" gaston.becerra@uflouniversidad.edu.ar"/><meta name="DC.Creator.Email" content="juan.pablo.lopez@uflouniversidad.edu.ar " />
+<meta name="DC.Identifier" content="  " />
+<meta name="DC.Identifier.URI" content="  " />
+<meta name="DC.Source" content=" Desarrollos en ciencias sociales computacionales " />
+<meta name="DC.Source.Volume" content=" 0 " />
+<meta name="DC.Source.Issue" content=" 0 " />
+<meta name="DC.Source.ISSN" content=" en trámite " />
+<meta name="DC.Date.Created" content=" 2024-11-14 " />
+<meta name="DC.Date.Issued" content=" 0000-00-00 " />
+<meta name="DC.Date.Modified" content=" 0000-00-00 " />
+<meta name="DC.Publisher" content=" Universidad de Flores, Argentina " />
+<meta name="DC.Format.extent" content=" Universidad de Flores, Argentina " />
+<meta name="DC.Subject" content=" Desarrollos " />
+
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -36,6 +57,107 @@
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -77,141 +199,246 @@ div.csl-indent {
 
 
 
-<div class="encabezado">
-<!-- por favor, no modificar! -->
-<style>
-  .encabezado {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #B8BCC2;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  .encabezado img {
-    height: 80px;
-    margin-right: 20px;
-  }
-  .encabezado h1 {
-    margin: 0;
-    color: #EA80FC;
-    text-align: center;
-  }
-  .encabezado p {
-    margin: 5px 0;
-    color: #B8BCC2;
-  }
-  h2 { color:red; }
-</style>
-<p><img src="logo.png" alt="Logo"/></p>
+<div style="margin-bottom: 20px;">
+<div
+style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+<img src="logo-blanco.jpg" alt="Logo Revista" style="height: 175px; margin-right: 20px;">
 <div>
-<h1>
-Título del artículo. Max 10 palabras
-</h1>
-<p>
-<strong>Autores:</strong>
+<p style="margin: 20px 0px; color: #666;">
+Revista <strong> Desarrollos en ciencias sociales computacionales
+</strong>Vol. 0 ( 0 ), 0-0
 </p>
+<h1 class="titulo-es" style="font-size: 1.8em; margin: 10px 0; color: #9237E2;">
+mincaqdasr. Herramienta minimalista para anotación y codificación de
+documentos
+</h1>
+<h2 class="titulo-en" style="font-size: 1.4em; margin: 0; color: #666;">
+mincaqdasr. A Minimalist Tool for Document Annotation and Coding
+</h2>
 </div>
+</div>
+</div>
+<p class="authors">
+Gastón Becerra ( Universidad de Flores, Argentina ) <br/> <a
+href="mailto:gaston.becerra@uflouniversidad.edu.ar"
+class="email">gaston.becerra@uflouniversidad.edu.ar</a>
+<a href=" https://orcid.org/0009-0006-9160-9744 " target="_blank">
+https://orcid.org/0009-0006-9160-9744 </a>
+</p>
+<p class="authors">
+Juan Pablo López-Alurralde ( Universidad de Flores, Argentina ) <br/> <a
+href="mailto:juan.pablo.lopez@uflouniversidad.edu.ar"
+class="email">juan.pablo.lopez@uflouniversidad.edu.ar</a>
+<a href=" https://orcid.org/0009-0006-9160-9744 " target="_blank">
+https://orcid.org/0009-0006-9160-9744 </a>
+</p>
+<p class="abstract">
+<strong>Resumen:</strong> mincaqdasr es una herramienta minimalista para
+el análisis cualitativo (CAQDAS), diseñada puntualmente para codificar o
+anotar corpus de documentos mediante una interfaz web. mincaqdasr genera
+un archivo .json que incluye todos los elementos del proyecto,
+(documentos, fragmentos, anotaciones, códigos, etc.) eliminando la
+necesidad de gestionar carpetas adicionales. mincaqdasr puede ser
+invocado desde R o de manera autónoma con cualquier navegador que tenga
+JavaScript habilitado.
+</p>
+<p class="abstract">
+<strong>Palabras clave:</strong> CAQDAS, R, JavaScript, software para
+análisis cualitativo de datos asistido por computadora, investigación
+cualitativa
+</p>
+<p class="abstract">
+<strong>Abstract:</strong> mincaqdasr is a minimalist tool for
+qualitative analysis (CAQDAS), specifically designed for coding or
+annotating document corpora through a web interface. mincaqdasr
+generates a .json file that includes all project elements (documents,
+fragments, annotations, codes, etc.), eliminating the need to manage
+additional folders. mincaqdasr can be invoked from R or used
+independently with any browser that supports JavaScript.
+</p>
+<p class="abstract">
+<strong>Keywords:</strong> CAQDAS, R, JavaScript, computer-assisted
+qualitative data analysis software, qualitative research
+</p>
+<p class="abstract">
+<strong>Recibido:</strong> 2024-11-14 | <strong>Aceptado:</strong>
+0000-00-00
+</p>
+<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+<tr style="background-color: #f2f2f2; text-align: left;">
+<th class="data-header">
+Recurso/Resources
+</th>
+<th class="data-content">
+URL
+</th>
+</tr>
+<tr>
+<td class="data-header">
+Repositorio/Repository
+</td>
+<td class="data-content">
+<a href=" https://github.com/gastonbecerra/mincaqdasr " target="_blank">
+https://github.com/gastonbecerra/mincaqdasr </a>
+</td>
+</tr>
+<tr>
+<td class="data-header">
+Licencia/Licence
+</td>
+<td class="data-content">
+<a href=" https://github.com/gastonbecerra/mincaqdasr?tab=GPL-3.0-1-ov-file#readme " target="_blank">
+https://github.com/gastonbecerra/mincaqdasr?tab=GPL-3.0-1-ov-file#readme
+</a>
+</td>
+</tr>
+<tr>
+<td class="data-header">
+Lenguajes/Languages Formatos/Formats
+</td>
+<td class="data-content">
+<div class="tag-list">
+<div class="tag">
+R
+</div>
+<div class="tag">
+JavaScript
+</div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div id="justificación" class="section level2">
 <h2>Justificación</h2>
-<p>mincaqdasr es un herramienta para análisis cualitativo (CAQDAS),
-particularmente para la tarea de codificar o anotar un corpus de
-documentos o fragmentos de los mismos, a través de una interfaz gráfica
-(GUI) que corre en cualquier navegador que tenga JavaScript
-habilitado.</p>
-<p>En investigación cualitativa, la codificación es un proceso clave
-<span class="citation">(Saldaña, 2016)</span>. Otro ejemplo importante
-se encuentra en <span class="citation">(Auerbach &amp; Silverstein,
-2003)</span>.</p>
-<p>En investigación cualitativa una tarea esencial es la de “codificar”:
-“A code in qualitative inquiry is most often a word or short phrase that
-symbolically assigns a summative, salient, essence-capturing, and/or
-evocative attribute for a portion of language-based or visual data”1. El
-objetivo de mincaqdasr es ofrecer una interfaz gráfica sencilla para
-facilitar este proceso, que puedar ser incluida en el código de un
-análisis mayor (donde, por ejemplo, se genera el corpus de documentos, o
-se procesen correlaciones entre los códigos asignados), y que ayude a
-volver nuestro análisis más transparente y transportable.</p>
-<p>El corpus anotado se exporta en un archivo .json que contiene todos
-los elementos de un proyecto, de modo modo que no es necesario hacer
-bundles, carpetas, ni exportar nada más.</p>
+<p>mincaqdasr es una herramienta para análisis cualitativo (CAQDAS),
+diseñada específicamente para asistir en la tarea de codificar o anotar
+un corpus de documentos breves a través de una interfaz web. En
+investigación cualitativa, este proceso de anotación es conocido como
+“codificación”, definido como “… una palabra o frase breve que
+simbólicamente asigna un atributo sintético, saliente, esencial y/o
+evocativo a una porción de datos basados en el lenguaje” <span
+class="citation">(Saldaña, 2016, p. 3)</span>. Este proceso suele ser
+uno de los primeros pasos en un diseño espiralado o por etapas, donde
+los códigos se integran en temas y argumentos para conceptualizar y
+desarrollar una narrativa teórica <span class="citation">(Auerbach &amp;
+Silverstein, 2003)</span>.</p>
+<p>La herramienta ofrece una interfaz gráfica sencilla que permite
+identificar y resaltar fragmentos de texto, crear e imputar códigos, y
+registrar memos o comentarios. El resultado de la codificación se
+exporta en formato JSON (JavaScript Object Notation), un estándar que
+puede ser manipulado desde cualquier lenguaje de análisis de datos, como
+R o Python. De este modo, mincaqdasr promueve la transparencia y la
+colaboración en la investigación cualitativa.</p>
+<p>Construida como una aplicación web autónoma, mincaqdasr puede
+ejecutarse en cualquier navegador que tenga JavaScript habilitado. Su
+diseño minimalista se centra exclusivamente en las tareas esenciales
+para la codificación, dejando al investigador la flexibilidad de
+gestionar otras etapas del análisis cualitativo, como la limpieza de
+datos, el manejo de documentos o la construcción de tablas y redes
+temáticas, utilizando los flujos de trabajo que considere más
+convenientes.</p>
+<p>El corpus se puede cargar como un vector simple de texto, eliminando
+la necesidad de crear carpetas o paquetes (bundles) como en otras
+herramientas. Para facilitar el trabajo en R, mincaqdasr incluye
+funciones para iniciar la interfaz como una shinyapp y para manipular el
+archivo JSON resultante de la codificación.</p>
 </div>
-<div id="estructura-de-datos" class="section level2">
-<h2>Estructura de datos</h2>
-<p>Los datos se guardan en .json que incluye 4 elementos primarios: *
-documentos (como un vector de texto); * códigos (un vector de texto) que
-se aplican tanto para documentos como a fragmentos; * anotaciones a
-nivel documento, que incluyen la referencia a uno o varios códigos y un
-memo del anotador; * fragmentos y anotaciones a nivel fragmentos, que
-incluyen la referencia al documento que contiene el fragment, la
-referencia a uno o varios códigos, y memo del anotador.</p>
-<p>Un ejemplo de este .json corresponde a un análisis sobre sentidos de
-la partenidad (The Yeshiva University Fatherhood Project) que Auerbach y
-Silverstein incluyen en su libro sobre investigación cualitativa,
-codificación y grounded theory2, y que los autores analizan paso a paso:
-la lectura de los documentos, selección de los fragmentos, anotación de
-comentarios del analista, y generación y asignación de códigos o
-etiquetas. Todos estos pasos se pueden realizar con mincaqdasr.</p>
-<p>En R, estos .json pueden ser importado en R con jsonlite::read_json()
-y manipulados como una lista. El package de mincaqsdar incluye algunas
-funciones para simplificar esta manipulación de datos.</p>
-<p>Otro ejemplo de .json es sobre fragmentos de noticias de la prensa
-argentina acerca de “big data”. En este caso no se asignan códigos a
-fragmentos, sino que cada documento es clasificado con una etiqueta de
-“positivo” o “negativo”, de acuerdo a si el big data queda asociado a
-una potencial aplicación beneficiosa o a un riesgo. El ejemplo se
-utiliza en este tutorial3, donde se cita el corpus más amplio.</p>
-</div>
-<div id="usar-mincaqdasr-en-r" class="section level2">
-<h2>Usar mincaqdasr en R</h2>
-<p>Cuando llamamos a <code>mincaqdasr::start_gui()</code> estamos
-abriendo un .html adentro de una shinyapp (no es la mejor
-implementación, pero es rápida; lo mejor sería abrir el navegador sin
-llamar una shinyapp). Esto significa que R queda “escuchando” la
-shinyapp de modo que vamos a ver en nuestra consola un mensaje tipo
-Listening on <a href="http://127.0.0.1:7654"
-class="uri">http://127.0.0.1:7654</a>. Una vez que hayamos terminado de
-trabajar con el GUI debemos cerrar este proceso para poder seguir usando
-R. You can stop the app and return access to the console using any one
-of these options: Click the stop sign icon on the R console toolbar.
-Click on the console, then press Esc (or press Ctrl + C if you’re not
-using RStudio). Close the Shiny app window. Más info sobre esto acá: <a
-href="https://mastering-shiny.org/basic-app.html#running"
-class="uri">https://mastering-shiny.org/basic-app.html#running</a> Usar
-mincaqdasr sin R El GUI está pensado para correr de manera autónoma, de
-modo que se puede utilizar sin llamarlo desde R, ni instalar todo el
-package. En cuyo caso, sólo hay que descargar la carpeta que tiene 3
-archivos llamados “gui” (.html, .js, .css) y 2 .json de ejemplo. Para
-correr el GUI hay que abrir el archivo inst/gui.html con un navegador
-que tenga JavaScript habilitado. Los documentos y códigos de anotación
-se pueden incluir directamente dentro del
-<code>&lt;script&gt;&lt;/script&gt;</code>, en una variable llamada
-input_data. En el .html ya hay un ejemplo comentado que se puede
-editar.</p>
+<div id="estructura-de-los-datos" class="section level2">
+<h2>Estructura de los datos</h2>
+<p>Los datos se guardan en un archivo JSON que incluye 4 elementos:</p>
+<ul>
+<li>documentos (como un vector de texto);</li>
+<li>códigos (un vector de texto);</li>
+<li>anotaciones a nivel documento, referenciando uno o varios códigos y
+un memo del anotador;</li>
+<li>anotaciones a nivel fragmento, referenciando uno o varios códigos y
+un memo del anotador;</li>
+</ul>
+<p>Incluimos dos ejemplos breves de codificaciones en formato JSON. El
+primero retoma fragmentos del trabajo de M. Zizi en el proyecto “The
+Yeshiva University Fatherhood Project”, que Auerbach y Silverstein
+(2003) presentan en su libro, ilustrando paso a paso las tareas clave
+del análisis cualitativo: desde la lectura y selección de fragmentos
+hasta la asignación de códigos y su elaboración conceptual. Con
+mincaqdasr, es posible registrar todas estas tareas, excepto la
+última.</p>
+<p>El segundo ejemplo contiene fragmentos de noticias de la prensa
+argentina sobre “big data”. En este caso, no se asignan códigos a
+fragmentos específicos; en su lugar, cada documento se clasifica con una
+etiqueta “positivo” o “negativo”, según mencione una aplicación
+beneficiosa o un riesgo. Otras tareas de análisis con este corpus se
+detallan en otro material propio <span class="citation">(Becerra &amp;
+López-Alurralde, 2024)</span>.</p>
 </div>
 <div id="otras-herramientas" class="section level2">
 <h2>Otras herramientas</h2>
-<ul>
-<li><p>Simil NVivo o Atlas.ti pero minimalista, de modo que se incluye
-más fácilmente en tu propio <em>workflow</em> de trabajo y otras tareas
-del análisis (scrapeo, limpieza, etc.)</p></li>
-<li><p>qcoder requiere armar carpeta</p></li>
-<li><p>rqda requeire GFTk2 discontinuado</p></li>
-</ul>
+<p>Existen varias herramientas comerciales para asistir en el análisis
+cualitativo (CAQDAS). Las más conocidas son NVivo, Maxda o Atlas.ti, que
+incluyen varias funciones de manejo de documentos y análisis, y que
+trabajan con varios formatos de documentos, no sólo textuales. A
+diferencia de estas, mincaqdasr es gratuita y de código abierto, y se
+limita a texto plano y no cubre funciones más allá de las necesarias
+para anotar o codificar, lo que puede ser conveniente cuando el
+investigador maneja su flujo de trabajo en un lenguaje de análisis de
+datos como R.</p>
+<p>En R se encuentra disponible el package qcoder <span
+class="citation">(Duckles et al., 2024)</span> que también permite la
+codificación a través de una interfaz gráfica que, además, permite la
+exploración de códigos y fragmentos. Sin embargo, tiene un manejo del
+proyecto y sus archivos mucho más estructurado, de modo que puede
+resultar más dificil de integrar en un código más amplio. No conocemos
+otros proyectos activos –y se debe advertir que qcoder no parece haber
+tenido actualizaciones en los últimos años– que cumplan funciones de
+CAQDAS.</p>
 </div>
-<div id="referencias" class="section level1">
-<h1>Referencias</h1>
+<div id="instalación" class="section level2">
+<h2>Instalación</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="st">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="st">&quot;Quisque mollis risus libero&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="st">&quot;Maecenas accumsan scelerisque blandit&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>mincaqdasr<span class="sc">::</span><span class="fu">start_gui</span>(<span class="at">docs =</span> corpus)</span></code></pre></div>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referencias</h2>
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
 <div id="ref-auerbach2003" class="csl-entry">
-Auerbach, C. F., &amp; Silverstein, L. B. (2003). Qualitative data: An
-introduction to coding and analysis. <em>NYU Press</em>.
+Auerbach, C. F., &amp; Silverstein, L. B. (2003). <em>Qualitative data:
+An introduction to coding and analysis</em>. NYU Press.
+</div>
+<div id="ref-cursor" class="csl-entry">
+Becerra, G., &amp; López-Alurralde, J. P. (2024). <em>Curso
+introductorio a r para las ciencias sociales</em>. <a
+href="https://bookdown.org/gaston_becerra/curso-intro-r/">https://bookdown.org/gaston_becerra/curso-intro-r/</a>
+</div>
+<div id="ref-qcoder2024" class="csl-entry">
+Duckles, B., Sholler, D., Draper, J., &amp; Laderas, T. (2024).
+<em>Qcoder: Lightweight qualitative coding</em>. <a
+href="https://github.com/ropenscilabs/qcoder">https://github.com/ropenscilabs/qcoder</a>
 </div>
 <div id="ref-saldaña2016" class="csl-entry">
 Saldaña, J. (2016). <em>The coding manual for qualitative
 researchers</em>. SAGE Publications.
 </div>
 </div>
+<footer>
+<p>
+Gastón Becerra, Juan Pablo López-Alurralde ( 2024 ). mincaqdasr.
+Herramienta minimalista para anotación y codificación de documentos .
+<i> Desarrollos en ciencias sociales computacionales </i> 0 ( 0 ) , 0-0
+</p>
+<p>
+Revista <strong>Desarrollos en Ciencias Sociales
+Computacionales</strong> | ISSN: en trámite <br/>
+<a href="https://revistadesarrollos.uflo.edu.ar/">https://revistadesarrollos.uflo.edu.ar/</a>
+<br/> Licenciatura en Sociología / Facultad de Psicología y Ciencias
+Sociales / Universidad de Flores, Argentina <br/>
+</p>
+</footer>
 </div>
 
 
