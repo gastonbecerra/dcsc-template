@@ -1,7 +1,8 @@
 ---
+title: "Revista Desarrollos en Ciencias Sociales Computacionales"
 output:
   html_document:
-    self_contained: false
+    self_contained: true
     theme: null
     mathjax: null
     highlight: tango
@@ -31,6 +32,151 @@ suppressMessages(suppressWarnings(library(jsonlite)))
 library(jsonlite)
 metadata <- fromJSON('metadatos.json')
 
+# estilos ------
+
+estilos <- "
+<style>
+body {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.6;
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 1200px;
+}
+
+h1.title {
+    display: none;
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #B8BCC2;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.encabezado img {
+  height: 80px;
+  margin-right: 20px;
+}
+
+.encabezado h1 {
+  line-height: 90%;
+}
+
+h1, h2 {
+  color: #9237E2;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.9em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.encabezado p {
+  margin: 5px 0;
+  color: #666;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 400;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 40px;
+  color: #666;
+}
+
+h1.titulo-es {
+  font-weight: bold;
+  color: #9237E2;
+  line-height: 95%;
+}
+
+h2.titulo-en {
+  font-weight: 400;
+  font-size: 1.7em;
+  color: #9237E2;
+  margin-top: 5px;
+  line-height: 95%;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #eef2ff;
+  color: #3366cc;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.data-header {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: right
+}
+
+.data-content {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.abstract {
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  font-style: italic;
+  line-height: 95%;
+  min-width: 500px;
+  max-width: 800px;
+  margin: 12px auto 12px auto;
+}
+.authors {
+  text-align: center;
+  font-size: 1em;
+  color: #333;
+}
+.cita {
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  line-height: 95%;
+  min-width: 500px;
+  max-width: 800px;
+  margin: 12px auto 12px auto;
+}
+
+
+footer {
+   text-align: center;
+   font-size: 0.9em;
+   margin-top: 40px;
+   color: #666;
+}
+</style>
+"
+
 # metadatos -----
 
 cat('
@@ -58,11 +204,8 @@ cat('
 <meta name="DC.Format.extent" content="', metadata$publisher, '" />
 <meta name="DC.Subject" content="', metadata$section, '" />
 
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<link href="styles.css" rel="stylesheet">
-
-', file = "custom-head.html")
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">',
+estilos, file = "custom-head.html")
 
 # encabezado -----
 
@@ -72,7 +215,7 @@ cat('<div style="margin-bottom: 20px;">')
 cat('<div style="display: flex; align-items: flex-start; margin-bottom: 20px;">')
 cat('<img src="logo-blanco.jpg" alt="Logo Revista" style="height: 175px; margin-right: 20px;">')
 cat('<div>')
-cat('<p style="margin: 20px 0px; color: #666;">Revista <strong>', metadata$source, '</strong>Vol. ', metadata$source_volume, '(', metadata$source_issue, '), ', metadata$pages, '</p>')
+cat('<p style="margin: 20px 0px; color: #666;">Revista <strong>', metadata$source, '</strong> Vol. ', metadata$source_volume, ' (', metadata$source_issue, '), ', metadata$pages, '</p>', sep = "")
 cat('<h1 class="titulo-es" style="font-size: 1.8em; margin: 10px 0; color: #9237E2;">', metadata$title_sp, '</h1>')
 cat('<h2 class="titulo-en" style="font-size: 1.4em; margin: 0; color: #666;">', metadata$title_en, '</h2>')
 cat('</div>')
@@ -88,10 +231,10 @@ cat('</div>')
 for (i in seq_along(metadata$authors_name)) {
   cat('<p class="authors">',
       metadata$authors_name[i], 
-      '(', metadata$authors_affiliation[i], ') <br/>', 
+      ' (', metadata$authors_affiliation[i], ') <br/>', 
       metadata$authors_email[i] , ' ',
       '<a href="', metadata$authors_orcid[i], '" target="_blank">', metadata$authors_orcid[i], '</a>',
-      '</p>')
+      '</p>', sep = "")
 }
 
 # Abstract y keywords en español
@@ -111,6 +254,28 @@ cat('<p class="abstract"><strong>Recibido:</strong> ',
     metadata$date_created, 
     ' | <strong>Aceptado:</strong> ', 
     metadata$date_issued, '</p>')
+
+format_apa_authors <- function(authors) {
+  formatted <- sapply(authors, function(name) {
+    parts <- strsplit(name, " ")[[1]]
+    last_name <- tail(parts, 1)
+    initials <- paste(substr(parts[-length(parts)], 1, 1), collapse = ". ")
+    paste(last_name, paste0(initials, "."))
+  })
+  if (length(formatted) > 1) {
+    paste(paste(formatted[-length(formatted)], collapse = ", "), "&", formatted[length(formatted)])
+  } else {
+    formatted
+  }
+}
+
+cat('<p class="cita"><strong>Cita APA:</strong> ', 
+    format_apa_authors(metadata$authors_name), ' (',
+    substr(metadata$date_created, 1, 4), '). ', 
+    metadata$title_sp, '. ', '<i>', metadata$source, '</i> ', 
+    metadata$source_volume, ' (', metadata$source_issue, ')',
+    ', ', metadata$pages, 
+    '</p>', sep = "")
 
 # Tabla de URLs
 cat('<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">')
@@ -157,7 +322,8 @@ cat('</div>')
 
 ## Justificación
 
-mincaqdasr es una herramienta para análisis cualitativo (CAQDAS), diseñada específicamente para asistir en la tarea de codificar o anotar un corpus de documentos breves a través de una interfaz web. En investigación cualitativa, este proceso de anotación es conocido como “codificación”, definido como “... una palabra o frase breve que simbólicamente asigna un atributo sintético, saliente, esencial y/o evocativo a una porción de datos basados en el lenguaje” [@saldaña2016, p. 3]. Este proceso suele ser uno de los primeros pasos en un diseño espiralado o por etapas, donde los códigos se integran en temas y argumentos para conceptualizar y desarrollar una narrativa teórica [@auerbach2003].
+mincaqdasr es una herramienta para análisis cualitativo (CAQDAS), diseñada específicamente para asistir en la tarea de codificar o anotar un corpus de documentos breves a través de una interfaz web. 
+En investigación cualitativa, este proceso de anotación es conocido como “codificación”, definido como “... una palabra o frase breve que simbólicamente asigna un atributo sintético, saliente, esencial y/o evocativo a una porción de datos basados en el lenguaje” [@saldaña2016, p. 3]. Este proceso suele ser uno de los primeros pasos en un diseño espiralado o por etapas, donde los códigos se integran en temas y argumentos para conceptualizar y desarrollar una narrativa teórica [@auerbach2003].
 
 La herramienta ofrece una interfaz gráfica sencilla que permite identificar y resaltar fragmentos de texto, crear e imputar códigos, y registrar memos o comentarios. El resultado de la codificación se exporta en formato JSON (JavaScript Object Notation), un estándar que puede ser manipulado desde cualquier lenguaje de análisis de datos, como R o Python. De este modo, mincaqdasr promueve la transparencia y la colaboración en la investigación cualitativa.
 
@@ -193,13 +359,6 @@ En R se encuentra disponible el package qcoder [@qcoder2024] que también permit
 
 cat('<footer>',
 
-  '<p>', 
-  paste(metadata$authors_name, collapse = ", "), ' (', substr(metadata$date_created, 1, 4), '). ', 
-  metadata$title_sp, '. ', '<i>', metadata$source, '</i>', 
-  metadata$source_volume, '(', metadata$source_issue, ')',
-  ', ', metadata$pages, 
-  '</p>',
-  
   '<p>', 
   'Revista <strong>Desarrollos en Ciencias Sociales Computacionales</strong> | ISSN: en trámite <br/>',
   '<a href="https://revistadesarrollos.uflo.edu.ar/">https://revistadesarrollos.uflo.edu.ar/</a> <br/>',
